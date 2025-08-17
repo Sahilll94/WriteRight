@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WriteRight - Setup</title>
+  <style>
+    :root {
+      --primary-color: #4a6ed0;
+      --background-color: #f9f9f9;
+      --card-color: #ffffff;
+      --text-color: #333333;
+      --success-color: #4caf50;
+      --error-color: #f44336;
+      --info-color: #2196f3;
+      --border-radius: 8px;
+      --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 500px;
+      padding: 1.5rem;
+      background-color: var(--card-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+    
+    h1 {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    
+    .input-group {
+      margin-bottom: 1.2rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+      box-sizing: border-box;
+    }
+    
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 500;
+    }
+    
+    .status-container {
+      margin-top: 1rem;
+      padding: 0.8rem;
+      border-radius: var(--border-radius);
+      display: none;
+      font-size: 0.9rem;
+    }
+    
+    .status-container.success {
+      background-color: rgba(76, 175, 80, 0.1);
+      border: 1px solid var(--success-color);
+      color: var(--success-color);
+    }
+    
+    .status-container.error {
+      background-color: rgba(244, 67, 54, 0.1);
+      border: 1px solid var(--error-color);
+      color: var(--error-color);
+    }
+    
+    .status-container.info {
+      background-color: rgba(33, 150, 243, 0.1);
+      border: 1px solid var(--info-color);
+      color: var(--info-color);
+    }
+    
+    .loader {
+      display: none;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid var(--primary-color);
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      animation: spin 1s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .instructions {
+      margin-top: 1.2rem;
+      padding: 0.8rem;
+      border-radius: var(--border-radius);
+      border-left: 3px solid var(--info-color);
+      background-color: rgba(33, 150, 243, 0.05);
+      font-size: 0.85rem;
+    }
+    
+    .instructions h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      color: var(--info-color);
+      font-size: 1rem;
+    }
+    
+    .instructions p {
+      margin: 0.3rem 0;
+    }
+    
+    .instructions a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    .keyboard-shortcut {
+      display: inline-block;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 1px 4px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      margin: 0 1px;
+    }
+    
+    .success-view {
+      display: none;
+    }
+    
+    .success-view ol {
+      padding-left: 1.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .success-view li {
+      margin-bottom: 0.4rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Setup View -->
+    <div id="setup-view">
+      <h1>WriteRight Setup</h1>
+      
+      <div class="input-group">
+        <label for="api-key-input">Gemini API Key</label>
+        <input type="password" id="api-key-input" placeholder="Enter your Gemini API key" />
+      </div>
+      
+      <button id="save-button">
+        <span id="loader" class="loader"></span>
+        Save API Key
+      </button>
+      
+      <div class="instructions">
+        <h3>How to get a Gemini API Key:</h3>
+        <p>1. Visit <a href="https://aistudio.google.com/apikey" target="_blank">Google AI Studio</a></p>
+        <p>2. Sign in with your Google account</p>
+        <p>3. Create a new API key</p>
+        <p>4. Copy and paste it above</p>
+      </div>
+    </div>
+    
+    <!-- Success View (shown after API key is saved) -->
+    <div id="success-view" class="success-view">
+      <h1>WriteRight is Ready!</h1>
+      
+      <div class="status-container success" style="display: block;">
+        API Key saved successfully! You can now close this window.
+      </div>
+      
+      <div class="instructions">
+        <h3>How to Use:</h3>
+        <ol>
+          <li>Select text with grammatical errors in any application</li>
+          <li>Copy the text to your clipboard (<span class="keyboard-shortcut">Ctrl</span>+<span class="keyboard-shortcut">C</span>)</li>
+          <li>Press <span class="keyboard-shortcut">Ctrl</span>+<span class="keyboard-shortcut">A</span>+<span class="keyboard-shortcut">L</span> to correct grammar</li>
+          <li>Paste the corrected text (<span class="keyboard-shortcut">Ctrl</span>+<span class="keyboard-shortcut">V</span>) where you need it</li>
+        </ol>
+        <p>WriteRight will continue running in the background. You can close this window.</p>
+      </div>
+      
+      <button id="close-button" style="margin-top: 1rem; background-color: #666;">
+        Close
+      </button>
+    </div>
+    
+    <div id="status-container" class="status-container">
+      <span id="status">Please enter your Gemini API key to get started.</span>
+    </div>
+  </div>
+  
+  <script src="renderer.js"></script>
+</body>
+</html>
