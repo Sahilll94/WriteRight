@@ -1,53 +1,40 @@
-name: Build Executable file
+name: Build and Release
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+      - "v*"   # Example: v1.0.0 → triggers a release build
+  workflow_dispatch: # allows manual trigger
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
-      fail-fast: false
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: "npm"
 
       - name: Install dependencies
-        run: npm install --verbose
+        run: npm ci
 
-      - name: Install Linux dependencies
-        if: matrix.os == 'ubuntu-latest'
-        run: sudo apt-get update && sudo apt-get install -y libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0 libnss3 libxss1 libasound2
-
-      - name: Build app (Windows)
-        if: matrix.os == 'windows-latest'
-        shell: powershell
+      - name: Build app
         run: |
-          git config --global core.symlinks true
-          Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-          npm run build:win --verbose
+          npm run build
+          npm run dist
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Build app (macOS)
-        if: matrix.os == 'macos-latest'
-        run: npm run build:mac --verbose
-
-      - name: Build app (Linux)
-        if: matrix.os == 'ubuntu-latest'
-        run: npm run build:linux --verbose
-
-      - name: Upload build artifacts
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: app-builds-${{ matrix.os }}
+          name: ${{ runner.os }}-artifacts
           path: dist/**
