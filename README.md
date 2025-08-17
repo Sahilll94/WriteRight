@@ -2,7 +2,6 @@
 
 WriteRight is a lightweight desktop application that helps you correct grammatical errors and improve text readability with a simple keyboard shortcut. Powered by Google's Gemini AI, WriteRight integrates seamlessly with any application where you write.
 
-![WriteRight Logo](https://placeholder-for-logo.png)
 
 ## Download
 
@@ -88,8 +87,3 @@ npm run build:all    # For all platforms
 
 - Electron.js
 - Google Generative AI API (Gemini 2.5 Flash)
-
-## License
-
-ISC
-#
