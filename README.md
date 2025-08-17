@@ -7,11 +7,12 @@ WriteRight is a lightweight desktop application that helps you correct grammatic
 
 Download the latest version for your platform:
 
-- **Windows**: [Download WriteRight for Windows](https://github.com/username/WriteRight/releases/latest/download/WriteRight-Setup.exe) [PLACEHOLDER]
-- **macOS**: [Download WriteRight for macOS](https://github.com/username/WriteRight/releases/latest/download/WriteRight.dmg) [PLACEHOLDER]
-- **Linux**: [Download WriteRight for Linux](https://github.com/username/WriteRight/releases/latest/download/WriteRight.AppImage) [PLACEHOLDER]
+- **Windows**: [Download WriteRight for Windows](https://github.com/Sahilll94/WriteRight/releases/download/v1.4.2/WriteRight-Setup-1.0.0.exe)
+- **macOS**: [Download WriteRight for macOS](https://github.com/Sahilll94/WriteRight/releases/download/v1.4.2/WriteRight-1.0.0-arm64.dmg)
+- **Linux**: [Download WriteRight for Linux](https://github.com/Sahilll94/WriteRight/releases/download/v1.4.2/WriteRight-1.0.0.AppImage)
 
-Or visit our [releases page](https://github.com/username/WriteRight/releases) for all available versions.
+Or visit our [releases page](https://github.com/Sahilll94/WriteRight/releases) for all available versions.
+
 
 ## How It Works
 
@@ -87,3 +88,4 @@ npm run build:all    # For all platforms
 
 - Electron.js
 - Google Generative AI API (Gemini 2.5 Flash)
+
