@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -31,8 +31,6 @@ jobs:
         run: |
           # Enable symbolic links for Windows builds
           git config --global core.symlinks true
-          # Run PowerShell as administrator for symlink creation
-          # Note: This runs the build in a way that handles symlinks properly
           Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
           npm run build:win
 
@@ -45,7 +43,7 @@ jobs:
         run: npm run build:linux
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app-builds-${{ matrix.os }}
           path: dist/**
